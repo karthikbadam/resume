@@ -44,14 +44,33 @@
 // Sidebar group, styled after the original resume: right-aligned, a plain
 // gray group title, and items flowing with pipe separators. Profile links
 // get one per row (wide: true).
+// Greedily pack items into lines that fit the available width, with light
+// dot separators only between items on the same line — never dangling at
+// line ends.
+#let flow-lines(items) = layout(size => {
+  let sep = text(fill: rgb("#94a3b8"), " · ")
+  let lines = ()
+  let current = none
+  for it in items {
+    let candidate = if current == none [#it] else [#current#sep#it]
+    if current != none and measure(candidate).width > size.width {
+      lines.push(current)
+      current = [#it]
+    } else {
+      current = candidate
+    }
+  }
+  if current != none { lines.push(current) }
+  lines.join(linebreak())
+})
+
 #let sidebar-group(title, items, wide: false) = align(right)[
   #text(font: display-font, weight: 600, size: 1.02em, fill: muted, title)
   #v(-3pt)
   #text(fill: ink, if wide {
     items.join(linebreak())
   } else {
-    // Light dot separators; the non-breaking space keeps them at line ends.
-    items.join(text(fill: rgb("#94a3b8"), "\u{a0}· "))
+    flow-lines(items)
   })
   #v(11pt)
 ]
@@ -79,7 +98,7 @@
 
 // Markerless "bullets": plain statements separated by whitespace.
 // Gaps stay clearly smaller than the between-entry spacing so entries group.
-#let bullets(items) = stack(spacing: 6pt, ..items.map(bind-runt))
+#let bullets(items) = stack(spacing: 7pt, ..items.map(bind-runt))
 
 // --- Sections ---------------------------------------------------------------
 
