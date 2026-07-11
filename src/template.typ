@@ -65,7 +65,7 @@
 })
 
 #let sidebar-group(title, items, wide: false) = align(right)[
-  #text(font: display-font, weight: 600, size: 1.02em, fill: muted, title)
+  #text(font: display-font, weight: 600, size: 1.02em, fill: ink, title)
   #v(-3pt)
   #text(fill: ink, if wide {
     items.join(linebreak())

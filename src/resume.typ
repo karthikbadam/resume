@@ -11,6 +11,7 @@
 #grid(
   columns: (24%, 1fr),
   column-gutter: 16pt,
+  align: (horizon, top),
   block(
     fill: panel,
     radius: 8pt,
