@@ -148,7 +148,7 @@
         column-gutter: 10pt,
         align: (left + bottom, right + bottom),
         [#text(weight: 600, size: 1.02em, p.name)#text(size: 0.92em, [ · #p.org])],
-        text(size: 0.86em, weight: 500, fill: accent, p.stack.join("\u{a0}· ")),
+        text(size: 0.86em, weight: 500, fill: muted, p.stack.join("\u{a0}· ")),
       )
       #v(-3pt)
       #bind-runt(p.description)
@@ -175,7 +175,7 @@
             inset: (x: 4pt, y: 1.5pt),
             radius: 3pt,
             baseline: 25%,
-            text(size: 0.92em, weight: 600, fill: accent, p.note),
+            text(size: 0.92em, weight: 600, fill: accent.darken(25%), p.note),
           )
         ]
       ],
