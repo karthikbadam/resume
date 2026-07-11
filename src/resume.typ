@@ -19,7 +19,7 @@
   columns: (24%, 1fr),
   column-gutter: 16pt,
   block(
-    inset: (x: 10pt, top: 8pt, bottom: 10pt),
+    inset: (x: 10pt, top: 26pt, bottom: 10pt),
     width: 100%,
     sidebar(data.basics, data.profiles, data.skills),
   ),
