@@ -32,31 +32,31 @@ skills:
     items: [Express, Flask, FastAPI, GraphQL, REST APIs]
 
 education:
-  - period: 2014–2019
+  - period: 2014 – 2019
     degree: Ph.D. in Computer Science
     school: University of Maryland
     location: College Park, MD, USA
     note: "Thesis: Enabling collaborative visual analysis across heterogeneous devices"
-  - period: 2012–2014
+  - period: 2012 – 2014
     degree: M.S. in Computer Engineering
     school: Purdue University
     location: West Lafayette, IN, USA
     note: "Thesis: Developing digital media platforms for early design"
-  - period: 2008–2012
+  - period: 2008 – 2012
     degree: B.Tech. in Computer Science
     school: IIT Hyderabad
     location: Hyderabad, India
     note: Mobile applications for rescue and recovery in post-disaster situations
 
 experience:
-  - period: 2026–now
+  - period: 2026 – now
     company: Zoox
     title: Staff Software Engineer
     location: Foster City, CA, USA
     bullets:
       - "Building custom data tooling for autonomous systems: interactive interfaces and
         services for exploring, curating, and debugging vehicular data."
-  - period: 2019–2026
+  - period: 2019 – 2026
     company: Apple
     title: Staff Full Stack Engineer
     location: Cupertino, CA, USA
@@ -69,7 +69,7 @@ experience:
         layer serving 10+ million dimension combinations.
       - Led development of a failure analysis platform with annotation-based triage of
         failures, adopted by many AI/ML product teams over the past five years.
-  - period: 2014–2019
+  - period: 2014 – 2019
     company: University of Maryland
     title: Research Assistant and Instructor
     location: College Park, MD, USA
@@ -80,28 +80,28 @@ experience:
         and presentation of insights.
       - Taught the Visual Analytics and Information Visualization courses and mentored
         several summer research interns.
-  - period: "2018"
+  - period: Summer 2018
     company: Microsoft Research
     title: Research Intern
     location: Redmond, WA, USA
     bullets:
       - Created a data-driven storytelling tool for composing interactive visual stories
         in data journalism.
-  - period: "2017"
+  - period: Summer 2017
     company: Adobe Research
     title: Research Intern
     location: Seattle, WA, USA
     bullets:
       - Designed and evaluated a new viewing experience for data-rich documents with
         tables and charts (Elastic Documents, publication P5).
-  - period: "2016"
+  - period: Summer 2016
     company: INRIA
     title: Visiting PhD Student
     location: Saclay, France
     bullets:
       - Built a progressive analytics system with Dr. Jean-Daniel Fekete to surface themes
         discussed on Twitter using NLP (publication P3).
-  - period: 2012–2014
+  - period: 2012 – 2014
     company: Purdue University
     title: Research Assistant
     location: West Lafayette, IN, USA
