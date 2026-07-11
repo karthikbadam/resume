@@ -129,9 +129,14 @@
   stack(
     spacing: entry-gap,
     ..experience.map(e => entry(e.period)[
-      #entry-heading(e.company, e.location)
+      #text(weight: 600, size: 1.02em, e.company)
       #v(-5pt)
-      #text(weight: 500, size: 0.94em, fill: muted, e.title)
+      #grid(
+        columns: (auto, 1fr),
+        column-gutter: 8pt,
+        text(weight: 500, size: 0.94em, fill: muted, e.title),
+        align(right, text(size: 0.88em, fill: muted, e.location)),
+      )
       #v(-4pt)
       #bullets(e.bullets)
     ]),
