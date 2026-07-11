@@ -231,7 +231,10 @@
     tracking: -0.006em,
     hyphenate: true,
     // Suppress widows/orphans at breaks and lone short words on final lines.
-    costs: (widow: 10000%, orphan: 10000%, runt: 10000%, hyphenation: 50%),
+    // Widow/orphan costs act at page breaks only. Runts are prevented
+    // structurally by bind-runt, so no runt cost — an extreme one makes the
+    // linebreaker stretch other lines to satisfy it.
+    costs: (widow: 10000%, orphan: 10000%, hyphenation: 50%),
   )
   set par(justify: true, leading: 0.6em)
   show link: set text(fill: ink)
