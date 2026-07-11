@@ -30,7 +30,7 @@
 // Section header: spaced-caps title with a hairline filling the rest of the row.
 // More space above than below, so the header binds to its own content.
 #let section(title) = {
-  v(9pt)
+  v(8pt)
   grid(
     columns: (auto, 1fr),
     column-gutter: 10pt,
@@ -92,9 +92,12 @@
 
 // Join a string's last two words with a non-breaking space, and forbid
 // hyphenation inside the final word, so a paragraph can never end in a
-// single-word or hyphenated-fragment line (runt).
+// single-word or hyphenated-fragment line (runt). Also keeps slash tokens
+// like "AI/ML" unbreakable (word joiner after the slash) — Typst otherwise
+// breaks after "/" and leaves a loose line behind.
 #let bind-runt(s) = {
   if type(s) != str { return s }
+  let s = s.replace("AI/ML", "AI/\u{2060}ML")
   let m = s.match(regex("^([\s\S]*)\s(\S+)$"))
   if m == none { return s }
   [#m.captures.at(0)\u{a0}#text(hyphenate: false, m.captures.at(1))]
@@ -102,14 +105,14 @@
 
 // Markerless "bullets": plain statements separated by whitespace.
 // Gaps stay clearly smaller than the between-entry spacing so entries group.
-#let bullets(items) = stack(spacing: 7pt, ..items.map(bind-runt))
+#let bullets(items) = stack(spacing: 9pt, ..items.map(bind-runt))
 
 // --- Sections ---------------------------------------------------------------
 
 #let education-section(education) = {
   section[Education]
   stack(
-    spacing: 8pt,
+    spacing: 7pt,
     ..education.map(e => entry(e.period)[
       #entry-heading(e.degree, [#e.school · #e.location])
       #v(-4pt)
@@ -121,7 +124,7 @@
 #let experience-section(experience) = {
   section[Professional Experience]
   stack(
-    spacing: 12pt,
+    spacing: 13pt,
     ..experience.map(e => entry(e.period)[
       #entry-heading(e.company, e.location)
       #v(-4pt)
@@ -228,7 +231,7 @@
     tracking: -0.006em,
     hyphenate: true,
     // Suppress widows/orphans at breaks and lone short words on final lines.
-    costs: (widow: 10000%, orphan: 10000%, runt: 10000%),
+    costs: (widow: 10000%, orphan: 10000%, runt: 10000%, hyphenation: 50%),
   )
   set par(justify: true, leading: 0.6em)
   show link: set text(fill: ink)
