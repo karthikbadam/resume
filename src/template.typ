@@ -3,7 +3,7 @@
 // Palette: near-black slate ink, pure blue accent, cool grays.
 #let ink = rgb("#0f172a")
 #let accent = rgb("#0071e3")
-#let muted = rgb("#64748b")
+#let muted = rgb("#475569")
 #let hairline = rgb("#e2e8f0")
 #let panel = rgb("#f1f5f9")
 
@@ -60,14 +60,8 @@
   align(right, text(size: 0.88em, fill: muted, detail)),
 )
 
-#let bullets(items) = list(
-  tight: false,
-  spacing: 5pt,
-  indent: 0pt,
-  body-indent: 7pt,
-  marker: text(fill: accent, "•"),
-  ..items,
-)
+// Markerless "bullets": plain statements separated by whitespace.
+#let bullets(items) = stack(spacing: 7.5pt, ..items)
 
 // --- Sections ---------------------------------------------------------------
 
@@ -90,8 +84,8 @@
     ..experience.map(e => entry(e.period)[
       #entry-heading(e.company, e.location)
       #v(-4pt)
-      #text(style: "italic", fill: muted, e.title)
-      #v(-4pt)
+      #text(weight: 500, size: 0.94em, fill: muted, e.title)
+      #v(-3pt)
       #bullets(e.bullets)
     ]),
   )
@@ -100,7 +94,7 @@
 #let projects-section(projects) = {
   section[Featured Projects]
   stack(
-    spacing: 9pt,
+    spacing: 10pt,
     ..projects.map(p => block[
       #text(weight: 600, size: 1.02em, p.name)
       #h(2pt)
@@ -120,7 +114,7 @@
 #let publications-section(publications) = {
   section[Notable Publications]
   stack(
-    spacing: 6pt,
+    spacing: 7pt,
     ..publications.map(p => grid(
       columns: (20pt, 1fr),
       column-gutter: 8pt,
@@ -157,6 +151,7 @@
 
 #let sidebar(basics, profiles, skills) = {
   set text(size: 0.94em)
+  set par(justify: false)
   sidebar-group("Profiles", profiles.map(p => link(p.url)[#p.label]))
   for group in skills {
     sidebar-group(group.group, group.items)
@@ -177,7 +172,7 @@
     footer: align(center, text(size: 8pt, fill: muted, context counter(page).display("1 / 1", both: true))),
   )
   set text(font: body-font, size: base-size, fill: ink, tracking: -0.006em)
-  set par(justify: false, leading: 0.62em)
+  set par(justify: true, leading: 0.62em)
   show link: set text(fill: ink)
   body
 }
