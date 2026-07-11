@@ -4,7 +4,6 @@ basics:
   first_name: Karthik
   last_name: Badam
   email: karthikbadam7@gmail.com
-  phone: +1 (765) 491-1767
   location: San Jose, CA
   website: karthikbadam.github.io
   website_url: https://karthikbadam.github.io
@@ -17,8 +16,6 @@ profiles:
     url: https://www.linkedin.com/in/karthikbadam
   - label: scholar/karthikbadam
     url: https://scholar.google.com/citations?user=zaEcCvcAAAAJ
-  - label: "@karthik_badam"
-    url: https://twitter.com/karthik_badam
 
 skills:
   - group: Frontend
@@ -52,12 +49,18 @@ education:
     note: "Main project: Mobile apps for rescue and recovery operations in post-disaster situations"
 
 experience:
-  - period: Since 2019
+  - period: Since 2026
+    company: Zoox
+    title: Staff Software Engineer
+    location: Foster City, CA, USA
+    bullets:
+      - Building custom data tooling for autonomous systems.
+  - period: 2019–2026
     company: Apple
-    title: Full Stack Engineer (Staff-Level)
+    title: Staff Full Stack Engineer
     location: Cupertino, CA, USA
     bullets:
-      - Building internal platforms to evaluate and improve generative language model (LLM)
+      - Built internal platforms to evaluate and improve generative language model (LLM)
         performance with data augmentation, advancing Apple's foundation models and Apple
         Intelligence products.
       - Created a data visualization platform for Siri and Spotlight teams to consume core
