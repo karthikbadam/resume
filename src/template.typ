@@ -170,13 +170,8 @@
       [
         #bind-runt(p.text)
         #if "note" in p [
-          #box(
-            fill: accent-tint,
-            inset: (x: 4pt, y: 1.5pt),
-            radius: 3pt,
-            baseline: 25%,
-            text(size: 0.92em, weight: 600, fill: accent.darken(25%), p.note),
-          )
+          #h(1fr)
+          #text(size: 0.92em, weight: 600, fill: accent.darken(25%), p.note)
         ]
       ],
     )),
