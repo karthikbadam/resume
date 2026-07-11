@@ -50,7 +50,7 @@
 // dot separators only between items on the same line — never dangling at
 // line ends.
 #let flow-lines(items) = layout(size => {
-  let sep = text(fill: rgb("#94a3b8"), " · ")
+  let sep = text(fill: muted, " · ")
   let lines = ()
   let current = none
   for it in items {
@@ -161,7 +161,7 @@
 #let publications-section(publications) = {
   section[Notable Publications]
   stack(
-    spacing: 8pt,
+    spacing: entry-gap,
     ..publications.map(p => grid(
       columns: (20pt, 1fr),
       column-gutter: 8pt,

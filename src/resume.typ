@@ -19,7 +19,7 @@
   columns: (24%, 1fr),
   column-gutter: 16pt,
   block(
-    inset: 10pt,
+    inset: (x: 10pt, top: 8pt, bottom: 10pt),
     width: 100%,
     sidebar(data.basics, data.profiles, data.skills),
   ),
@@ -33,10 +33,10 @@
 // Long-form prose: extra leading for readability.
 #pagebreak()
 #[
-  #set par(leading: 0.7em)
+  #set par(leading: 0.66em)
   #projects-section(data.projects)
-  #v(8pt)
+  #v(2pt)
   #publications-section(data.publications)
-  #v(8pt)
+  #v(2pt)
   #service-section(data.service)
 ]
