@@ -11,7 +11,13 @@
 #grid(
   columns: (24%, 1fr),
   column-gutter: 16pt,
-  grid.cell(fill: panel, inset: 10pt, sidebar(data.basics, data.profiles, data.skills)),
+  block(
+    fill: panel,
+    radius: 8pt,
+    inset: 10pt,
+    width: 100%,
+    sidebar(data.basics, data.profiles, data.skills),
+  ),
   {
     experience-section(data.experience)
     v(6pt)

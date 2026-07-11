@@ -26,8 +26,9 @@
 )
 
 // Section header: spaced-caps title with a hairline filling the rest of the row.
+// More space above than below, so the header binds to its own content.
 #let section(title) = {
-  v(5pt)
+  v(10pt)
   grid(
     columns: (auto, 1fr),
     column-gutter: 10pt,
@@ -35,14 +36,41 @@
     caps-label(title, size: 0.86em),
     line(length: 100%, stroke: 0.5pt + hairline),
   )
-  v(1pt)
+  v(2pt)
 }
 
-#let sidebar-group(title, items) = {
+// Sidebar group: items flow two per row; long items span the full width.
+// Profile links get one per row (wide: true).
+#let sidebar-group(title, items, wide: false) = {
   caps-label(title, fill: accent, size: 0.78em)
-  v(-4pt)
-  stack(spacing: 4.5pt, ..items.map(i => text(fill: ink, i)))
-  v(7pt)
+  v(-3pt)
+  if wide {
+    stack(spacing: 4.5pt, ..items)
+  } else {
+    // Pack adjacent short items into pairs; long items take a full row.
+    let cells = ()
+    let pending = none
+    for i in items {
+      if i.len() > 11 {
+        if pending != none { cells.push(grid.cell(colspan: 2, pending)); pending = none }
+        cells.push(grid.cell(colspan: 2, i))
+      } else if pending == none {
+        pending = i
+      } else {
+        cells.push(grid.cell(pending))
+        cells.push(grid.cell(i))
+        pending = none
+      }
+    }
+    if pending != none { cells.push(grid.cell(colspan: 2, pending)) }
+    grid(
+      columns: (1fr, 1fr),
+      column-gutter: 6pt,
+      row-gutter: 4.5pt,
+      ..cells,
+    )
+  }
+  v(10pt)
 }
 
 // A dated entry: muted period on the left, content on the right.
@@ -61,14 +89,15 @@
 )
 
 // Markerless "bullets": plain statements separated by whitespace.
-#let bullets(items) = stack(spacing: 7.5pt, ..items)
+// Gaps stay clearly smaller than the between-entry spacing so entries group.
+#let bullets(items) = stack(spacing: 6pt, ..items)
 
 // --- Sections ---------------------------------------------------------------
 
 #let education-section(education) = {
   section[Education]
   stack(
-    spacing: 8pt,
+    spacing: 10pt,
     ..education.map(e => entry(e.period)[
       #entry-heading(e.degree, [#e.school · #e.location])
       #v(-4pt)
@@ -80,7 +109,7 @@
 #let experience-section(experience) = {
   section[Professional Experience]
   stack(
-    spacing: 9pt,
+    spacing: 13pt,
     ..experience.map(e => entry(e.period)[
       #entry-heading(e.company, e.location)
       #v(-4pt)
@@ -94,13 +123,16 @@
 #let projects-section(projects) = {
   section[Featured Projects]
   stack(
-    spacing: 10pt,
+    spacing: 12pt,
     ..projects.map(p => block[
-      #text(weight: 600, size: 1.02em, p.name)
-      #h(2pt)
-      #text(size: 0.85em, fill: accent, p.stack.join(" · "))
-      #text(size: 0.88em, fill: muted, [ #p.org])
-      #v(-4pt)
+      #grid(
+        columns: (auto, 1fr),
+        column-gutter: 10pt,
+        align: (left + bottom, right + bottom),
+        [#text(weight: 600, size: 1.02em, p.name)#text(size: 0.92em, [ · #p.org])],
+        text(size: 0.86em, weight: 500, fill: accent, p.stack.join("\u{a0}· ")),
+      )
+      #v(-3pt)
       #text(size: 0.96em)[
         #p.description
         #if "contributions" in p [
@@ -114,7 +146,7 @@
 #let publications-section(publications) = {
   section[Notable Publications]
   stack(
-    spacing: 7pt,
+    spacing: 8pt,
     ..publications.map(p => grid(
       columns: (20pt, 1fr),
       column-gutter: 8pt,
@@ -152,7 +184,7 @@
 #let sidebar(basics, profiles, skills) = {
   set text(size: 0.94em)
   set par(justify: false)
-  sidebar-group("Profiles", profiles.map(p => link(p.url)[#p.label]))
+  sidebar-group("Profiles", profiles.map(p => link(p.url)[#p.label]), wide: true)
   for group in skills {
     sidebar-group(group.group, group.items)
   }

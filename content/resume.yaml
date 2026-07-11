@@ -108,7 +108,7 @@ experience:
 projects:
   - name: LLM Evaluation Platform
     stack: [React, TypeScript, Python, Turi Bolt, TensorRT, Celery, S3]
-    org: at Apple
+    org: Apple
     description:
       End-to-end internal platform for evaluating generative language models and understanding
       the datasets behind them. The benchmarking layer orchestrates distributed inference jobs,
@@ -122,7 +122,7 @@ projects:
       org and coached early users on diagnosing failures and tuning their models.
   - name: Metrics Platform
     stack: [React, VisX, Python, Spark, Airflow, Druid, Trino]
-    org: at Apple
+    org: Apple
     description:
       Provides the top usage, engagement, performance, and user experience metrics for Siri and
       Spotlight, built for monitoring and easy exploration of metrics across 10+ key dimensions.
@@ -132,7 +132,7 @@ projects:
       across 10+ million dimension combinations using a caching service and Druid.
   - name: Custom Dashboards
     stack: [D3, Vega-Lite, React, Svelte, Python, Spark]
-    org: at Apple
+    org: Apple
     description:
       Custom dashboards that help AI/ML teams understand conversational interactions with Siri
       through funnel analysis and capture key performance metrics for complex ML experiences.
@@ -141,7 +141,7 @@ projects:
       to generate metrics from big data, and APIs.
   - name: Failure Analysis Platform
     stack: [React, D3, Trino, Postgres]
-    org: at Apple
+    org: Apple
     description:
       Data analysis platform in the AI/ML org used to triage failures and prioritize improvements.
       Uses annotation and collaboration techniques so teams of engineers can identify failure
@@ -151,14 +151,14 @@ projects:
       visualization components, and back-end APIs.
   - name: Vistrates
     stack: [D3, Vega, JavaScript, Node, MongoDB]
-    org: at University of Maryland
+    org: University of Maryland
     description:
       A platform for data science that helps data scientists create analytical components in a
       flexible user interface that transforms into a notebook for development, a dashboard for
       exploration, and a slideshow for presentation (publication P6).
   - name: TimeFork
     stack: [JavaScript, D3, TensorFlow, Python]
-    org: at University of Maryland
+    org: University of Maryland
     description:
       Research tool for interactive prediction of time-series data. Uses ML models to generate
       multiple predictions and help users compare possible futures; evaluated through user
