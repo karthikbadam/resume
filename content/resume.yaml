@@ -46,7 +46,7 @@ education:
     degree: B.Tech. in Computer Science
     school: IIT Hyderabad
     location: Hyderabad, India
-    note: "Main project: Mobile apps for rescue and recovery operations in post-disaster situations"
+    note: "Main project: Mobile applications for rescue and recovery operations in post-disaster situations"
 
 experience:
   - period: Since 2026
@@ -76,13 +76,15 @@ experience:
         visualization and HCI conferences.
       - Created Vistrates, an open platform for visualization development, data exploration,
         and presentation of insights.
-      - Taught Visual Analytics and Visualization courses and mentored summer interns.
+      - Taught the Visual Analytics and Information Visualization courses and mentored
+        several summer research interns.
   - period: Summer 2018
     company: Microsoft Research
     title: Research Intern
     location: Redmond, WA, USA
     bullets:
-      - Created a data-driven storytelling tool to compose visual stories in data journalism.
+      - Created a data-driven storytelling tool for composing interactive visual stories
+        in data journalism.
   - period: Summer 2017
     company: Adobe Research
     title: Research Intern

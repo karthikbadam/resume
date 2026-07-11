@@ -1,11 +1,13 @@
 // Styling and components for the resume. Content lives in content/resume.yaml.
 
-// Palette: near-black slate ink, pure blue accent, cool grays.
+// Palette: near-black slate ink, cool grays. Accent + panel match the
+// portfolio site theme (karthikbadam.github.io src/theme.ts, light mode).
 #let ink = rgb("#0f172a")
-#let accent = rgb("#0071e3")
+#let accent = rgb("#2b6cb0")
 #let muted = rgb("#475569")
 #let hairline = rgb("#e2e8f0")
-#let panel = rgb("#f1f5f9")
+#let panel = rgb("#f0f5f9")
+#let accent-tint = rgb("#e3edf6")
 
 // Font pairing is overridable per build: --input body-font=... --input display-font=...
 #let body-font = sys.inputs.at("body-font", default: "Inter")
@@ -39,39 +41,20 @@
   v(2pt)
 }
 
-// Sidebar group: items flow two per row; long items span the full width.
-// Profile links get one per row (wide: true).
-#let sidebar-group(title, items, wide: false) = {
-  caps-label(title, fill: accent, size: 0.78em)
-  v(-3pt)
-  if wide {
-    stack(spacing: 4.5pt, ..items)
+// Sidebar group, styled after the original resume: right-aligned, a plain
+// gray group title, and items flowing with pipe separators. Profile links
+// get one per row (wide: true).
+#let sidebar-group(title, items, wide: false) = align(right)[
+  #text(font: display-font, weight: 600, size: 1.02em, fill: muted, title)
+  #v(-4pt)
+  #text(fill: ink, if wide {
+    items.join(linebreak())
   } else {
-    // Pack adjacent short items into pairs; long items take a full row.
-    let cells = ()
-    let pending = none
-    for i in items {
-      if i.len() > 11 {
-        if pending != none { cells.push(grid.cell(colspan: 2, pending)); pending = none }
-        cells.push(grid.cell(colspan: 2, i))
-      } else if pending == none {
-        pending = i
-      } else {
-        cells.push(grid.cell(pending))
-        cells.push(grid.cell(i))
-        pending = none
-      }
-    }
-    if pending != none { cells.push(grid.cell(colspan: 2, pending)) }
-    grid(
-      columns: (1fr, 1fr),
-      column-gutter: 6pt,
-      row-gutter: 4.5pt,
-      ..cells,
-    )
-  }
-  v(10pt)
-}
+    // Non-breaking space before each pipe keeps separators at line ends.
+    items.join("\u{a0}| ")
+  })
+  #v(9pt)
+]
 
 // A dated entry: muted period on the left, content on the right.
 #let entry(period, body) = grid(
@@ -159,7 +142,15 @@
       text(font: display-font, weight: 600, size: 0.9em, fill: accent, p.id),
       text(size: 0.96em)[
         #bind-runt(p.text)
-        #if "note" in p [ #text(weight: 600)[#p.note]]
+        #if "note" in p [
+          #box(
+            fill: accent-tint,
+            inset: (x: 4pt, y: 1.5pt),
+            radius: 3pt,
+            baseline: 25%,
+            text(size: 0.92em, weight: 600, fill: accent, p.note),
+          )
+        ]
       ],
     )),
   )
