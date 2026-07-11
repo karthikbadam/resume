@@ -15,6 +15,8 @@
 
 #let base-size = 9pt
 #let period-col = 58pt
+// One gap between entries everywhere, so sections have a uniform rhythm.
+#let entry-gap = 12pt
 
 // --- Small helpers ---------------------------------------------------------
 
@@ -79,7 +81,7 @@
 #let entry(period, body) = grid(
   columns: (period-col, 1fr),
   column-gutter: 12pt,
-  text(size: 0.88em, fill: muted, number-type: "lining", period),
+  text(size: 0.88em, fill: muted, period),
   body,
 )
 
@@ -112,10 +114,10 @@
 #let education-section(education) = {
   section[Education]
   stack(
-    spacing: 7pt,
+    spacing: entry-gap,
     ..education.map(e => entry(e.period)[
       #entry-heading(e.degree, [#e.school · #e.location])
-      #v(-4pt)
+      #v(-5pt)
       #text(fill: muted, bind-runt(e.note))
     ]),
   )
@@ -124,12 +126,12 @@
 #let experience-section(experience) = {
   section[Professional Experience]
   stack(
-    spacing: 13pt,
+    spacing: entry-gap,
     ..experience.map(e => entry(e.period)[
       #entry-heading(e.company, e.location)
-      #v(-4pt)
+      #v(-5pt)
       #text(weight: 500, size: 0.94em, fill: muted, e.title)
-      #v(-3pt)
+      #v(-4pt)
       #bullets(e.bullets)
     ]),
   )
@@ -138,7 +140,7 @@
 #let projects-section(projects) = {
   section[Featured Projects]
   stack(
-    spacing: 12pt,
+    spacing: entry-gap,
     ..projects.map(p => block[
       #grid(
         columns: (auto, 1fr),
@@ -164,7 +166,7 @@
       columns: (20pt, 1fr),
       column-gutter: 8pt,
       text(font: display-font, weight: 600, size: 0.9em, fill: accent, p.id),
-      text[
+      [
         #bind-runt(p.text)
         #if "note" in p [
           #box(
@@ -221,7 +223,7 @@
   )
   set page(
     paper: "us-letter",
-    margin: (x: 1.3cm, top: 1.1cm, bottom: 1.3cm),
+    margin: (x: 1.3cm, top: 1.1cm, bottom: 1.2cm),
     footer: align(center, text(size: 8pt, fill: muted, context counter(page).display("1 / 1", both: true))),
   )
   set text(
@@ -229,14 +231,9 @@
     size: base-size,
     fill: ink,
     tracking: -0.006em,
-    hyphenate: true,
-    // Suppress widows/orphans at breaks and lone short words on final lines.
-    // Widow/orphan costs act at page breaks only. Runts are prevented
-    // structurally by bind-runt, so no runt cost — an extreme one makes the
-    // linebreaker stretch other lines to satisfy it.
-    costs: (widow: 10000%, orphan: 10000%, hyphenation: 50%),
+    // Hyphenate readily rather than stretch inter-word spaces.
+    costs: (hyphenation: 50%),
   )
   set par(justify: true, leading: 0.6em)
-  show link: set text(fill: ink)
   body
 }
