@@ -77,11 +77,12 @@
   #v(11pt)
 ]
 
-// A dated entry: muted period on the left, content on the right.
+// A dated entry: period on the left, content on the right. Tabular figures
+// keep every year the same width so the column aligns.
 #let entry(period, body) = grid(
   columns: (period-col, 1fr),
   column-gutter: 12pt,
-  text(size: 0.88em, fill: muted, period),
+  text(size: 0.88em, number-width: "tabular", period),
   body,
 )
 

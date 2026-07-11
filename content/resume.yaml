@@ -49,7 +49,7 @@ education:
     note: Mobile applications for rescue and recovery in post-disaster situations
 
 experience:
-  - period: Since 2026
+  - period: 2026–now
     company: Zoox
     title: Staff Software Engineer
     location: Foster City, CA, USA
@@ -80,21 +80,21 @@ experience:
         and presentation of insights.
       - Taught the Visual Analytics and Information Visualization courses and mentored
         several summer research interns.
-  - period: Summer 2018
+  - period: "2018"
     company: Microsoft Research
     title: Research Intern
     location: Redmond, WA, USA
     bullets:
       - Created a data-driven storytelling tool for composing interactive visual stories
         in data journalism.
-  - period: Summer 2017
+  - period: "2017"
     company: Adobe Research
     title: Research Intern
     location: Seattle, WA, USA
     bullets:
       - Designed and evaluated a new viewing experience for data-rich documents with
         tables and charts (Elastic Documents, publication P5).
-  - period: Summer 2016
+  - period: "2016"
     company: INRIA
     title: Visiting PhD Student
     location: Saclay, France
