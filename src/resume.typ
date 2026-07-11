@@ -5,13 +5,13 @@
 #show: resume.with(data)
 
 #header-block(data.basics)
-#v(6pt)
+#v(8pt)
 
-// Page 1: sidebar (contact, profiles, skills) + education and experience.
+// Page 1: tinted sidebar panel (profiles, skills) + education and experience.
 #grid(
-  columns: (27%, 1fr),
-  column-gutter: 20pt,
-  sidebar(data.basics, data.profiles, data.skills),
+  columns: (28%, 1fr),
+  column-gutter: 16pt,
+  grid.cell(fill: panel, inset: 10pt, sidebar(data.basics, data.profiles, data.skills)),
   {
     education-section(data.education)
     v(6pt)
