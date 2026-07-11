@@ -1,14 +1,15 @@
 // Styling and components for the resume. Content lives in content/resume.yaml.
 
-// Palette: near-black slate ink, vivid blue accent, cool grays.
+// Palette: near-black slate ink, pure blue accent, cool grays.
 #let ink = rgb("#0f172a")
-#let accent = rgb("#2563eb")
+#let accent = rgb("#0071e3")
 #let muted = rgb("#64748b")
 #let hairline = rgb("#e2e8f0")
 #let panel = rgb("#f1f5f9")
 
-#let body-font = "Inter"
-#let display-font = "Space Grotesk"
+// Font pairing is overridable per build: --input body-font=... --input display-font=...
+#let body-font = sys.inputs.at("body-font", default: "Inter")
+#let display-font = sys.inputs.at("display-font", default: "Space Grotesk")
 
 #let base-size = 9pt
 #let period-col = 58pt
@@ -24,14 +25,13 @@
   upper(body),
 )
 
-// Section header: small accent bar, spaced-caps title, hairline filling the rest.
+// Section header: spaced-caps title with a hairline filling the rest of the row.
 #let section(title) = {
   v(5pt)
   grid(
-    columns: (auto, auto, 1fr),
-    column-gutter: 8pt,
+    columns: (auto, 1fr),
+    column-gutter: 10pt,
     align: horizon,
-    rect(width: 4pt, height: 8pt, fill: accent),
     caps-label(title, size: 0.86em),
     line(length: 100%, stroke: 0.5pt + hairline),
   )
@@ -40,10 +40,9 @@
 
 #let sidebar-group(title, items) = {
   caps-label(title, fill: accent, size: 0.78em)
-  v(-5pt)
-  // Non-breaking space before each separator so wraps leave the dot at line end.
-  text(fill: ink, items.join("\u{a0}· "))
-  v(5pt)
+  v(-4pt)
+  stack(spacing: 4.5pt, ..items.map(i => text(fill: ink, i)))
+  v(7pt)
 }
 
 // A dated entry: muted period on the left, content on the right.
@@ -63,10 +62,10 @@
 
 #let bullets(items) = list(
   tight: false,
-  spacing: 4pt,
+  spacing: 5pt,
   indent: 0pt,
   body-indent: 7pt,
-  marker: box(width: 3pt, height: 3pt, fill: accent, baseline: -3pt),
+  marker: text(fill: accent, "•"),
   ..items,
 )
 
@@ -75,11 +74,9 @@
 #let education-section(education) = {
   section[Education]
   stack(
-    spacing: 7pt,
+    spacing: 8pt,
     ..education.map(e => entry(e.period)[
-      #entry-heading(e.degree, e.location)
-      #v(-4pt)
-      #text(weight: 500, size: 0.96em, e.school)
+      #entry-heading(e.degree, [#e.school · #e.location])
       #v(-4pt)
       #text(size: 0.92em, fill: muted, e.note)
     ]),
@@ -89,7 +86,7 @@
 #let experience-section(experience) = {
   section[Professional Experience]
   stack(
-    spacing: 8pt,
+    spacing: 9pt,
     ..experience.map(e => entry(e.period)[
       #entry-heading(e.company, e.location)
       #v(-4pt)
@@ -103,7 +100,7 @@
 #let projects-section(projects) = {
   section[Featured Projects]
   stack(
-    spacing: 8pt,
+    spacing: 9pt,
     ..projects.map(p => block[
       #text(weight: 600, size: 1.02em, p.name)
       #h(2pt)
@@ -143,29 +140,20 @@
 
 // --- Page furniture ----------------------------------------------------------
 
-// Header: name on the left, contact stacked on the right, accent-tipped rule below.
-#let header-block(basics) = {
-  grid(
-    columns: (1fr, auto),
-    align: (left + bottom, right + bottom),
-    {
-      text(font: display-font, size: 27pt, weight: 500, tracking: -0.02em, basics.first_name)
-      h(7pt)
-      text(font: display-font, size: 27pt, weight: 700, tracking: -0.02em, fill: accent, basics.last_name)
-    },
-    text(size: 0.92em, fill: muted)[
-      #link(basics.website_url)[#basics.website] #h(3pt)|#h(3pt) #link("mailto:" + basics.email)[#basics.email] \
-      #basics.phone #h(3pt)|#h(3pt) #basics.location
-    ],
-  )
-  v(-2pt)
-  grid(
-    columns: (56pt, 1fr),
-    align: horizon,
-    rect(width: 100%, height: 2.5pt, fill: accent),
-    line(length: 100%, stroke: 0.5pt + hairline),
-  )
-}
+// Header: name on the left, contact stacked on the right.
+#let header-block(basics) = grid(
+  columns: (1fr, auto),
+  align: (left + bottom, right + bottom),
+  {
+    text(font: display-font, size: 27pt, weight: 500, tracking: -0.02em, basics.first_name)
+    h(7pt)
+    text(font: display-font, size: 27pt, weight: 700, tracking: -0.02em, fill: accent, basics.last_name)
+  },
+  text(size: 0.92em, fill: muted)[
+    #link(basics.website_url)[#basics.website] #h(3pt)|#h(3pt) #link("mailto:" + basics.email)[#basics.email] \
+    #basics.location
+  ],
+)
 
 #let sidebar(basics, profiles, skills) = {
   set text(size: 0.94em)
@@ -189,7 +177,7 @@
     footer: align(center, text(size: 8pt, fill: muted, context counter(page).display("1 / 1", both: true))),
   )
   set text(font: body-font, size: base-size, fill: ink, tracking: -0.006em)
-  set par(justify: false, leading: 0.55em)
+  set par(justify: false, leading: 0.62em)
   show link: set text(fill: ink)
   body
 }
