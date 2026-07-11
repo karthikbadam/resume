@@ -200,7 +200,7 @@
     text(font: display-font, size: 27pt, weight: 700, tracking: -0.02em, fill: accent, basics.last_name)
   },
   text(size: 0.92em, fill: muted)[
-    #link(basics.website_url)[#basics.website] #h(3pt)|#h(3pt) #link("mailto:" + basics.email)[#basics.email] \
+    #link(basics.website_url)[#basics.website] #h(3pt)·#h(3pt) #link("mailto:" + basics.email)[#basics.email] \
     #basics.location
   ],
 )
