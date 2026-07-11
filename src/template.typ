@@ -90,11 +90,15 @@
   align(right, text(size: 0.88em, fill: muted, detail)),
 )
 
-// Join a string's last two words with a non-breaking space so a paragraph
-// can never end in a single-word line (runt).
-#let bind-runt(s) = if type(s) == str {
-  s.replace(regex("\s(\S+)$"), m => "\u{a0}" + m.captures.at(0))
-} else { s }
+// Join a string's last two words with a non-breaking space, and forbid
+// hyphenation inside the final word, so a paragraph can never end in a
+// single-word or hyphenated-fragment line (runt).
+#let bind-runt(s) = {
+  if type(s) != str { return s }
+  let m = s.match(regex("^([\s\S]*)\s(\S+)$"))
+  if m == none { return s }
+  [#m.captures.at(0)\u{a0}#text(hyphenate: false, m.captures.at(1))]
+}
 
 // Markerless "bullets": plain statements separated by whitespace.
 // Gaps stay clearly smaller than the between-entry spacing so entries group.
@@ -109,7 +113,7 @@
     ..education.map(e => entry(e.period)[
       #entry-heading(e.degree, [#e.school · #e.location])
       #v(-4pt)
-      #text(size: 0.92em, fill: muted, bind-runt(e.note))
+      #text(fill: muted, bind-runt(e.note))
     ]),
   )
 }
@@ -141,11 +145,9 @@
         text(size: 0.86em, weight: 500, fill: accent, p.stack.join("\u{a0}· ")),
       )
       #v(-3pt)
-      #text(size: 0.96em)[
-        #bind-runt(p.description)
-        #if "contributions" in p [
-          #text(weight: 600)[Contributions:] #bind-runt(p.contributions)
-        ]
+      #bind-runt(p.description)
+      #if "contributions" in p [
+        #text(weight: 600)[Contributions:] #bind-runt(p.contributions)
       ]
     ]),
   )
@@ -159,7 +161,7 @@
       columns: (20pt, 1fr),
       column-gutter: 8pt,
       text(font: display-font, weight: 600, size: 0.9em, fill: accent, p.id),
-      text(size: 0.96em)[
+      text[
         #bind-runt(p.text)
         #if "note" in p [
           #box(
@@ -177,7 +179,7 @@
 
 #let service-section(service) = {
   section[Service]
-  bullets(service.map(s => text(size: 0.96em, s)))
+  bullets(service)
 }
 
 // --- Page furniture ----------------------------------------------------------
@@ -224,7 +226,7 @@
     size: base-size,
     fill: ink,
     tracking: -0.006em,
-    hyphenate: false,
+    hyphenate: true,
     // Suppress widows/orphans at breaks and lone short words on final lines.
     costs: (widow: 10000%, orphan: 10000%, runt: 10000%),
   )

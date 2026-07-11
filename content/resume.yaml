@@ -46,7 +46,7 @@ education:
     degree: B.Tech. in Computer Science
     school: IIT Hyderabad
     location: Hyderabad, India
-    note: Mobile applications for rescue and recovery operations in post-disaster situations
+    note: Mobile applications for rescue and recovery in post-disaster situations
 
 experience:
   - period: Since 2026
@@ -54,8 +54,8 @@ experience:
     title: Staff Software Engineer
     location: Foster City, CA, USA
     bullets:
-      - Building custom data tooling for autonomous systems — interactive interfaces and
-        services for exploring, curating, and debugging driving data.
+      - "Building custom data tooling for autonomous systems: interactive interfaces and
+        services for exploring, curating, and debugging driving data."
   - period: 2019–2026
     company: Apple
     title: Staff Full Stack Engineer
