@@ -5,7 +5,7 @@
 #show: resume.with(data)
 
 #header-block(data.basics)
-#v(8pt)
+#v(4pt)
 
 // Page 1: tinted sidebar panel (profiles, skills) + experience and education.
 #grid(
@@ -20,7 +20,7 @@
   ),
   {
     experience-section(data.experience)
-    v(6pt)
+    v(1pt)
     education-section(data.education)
   },
 )

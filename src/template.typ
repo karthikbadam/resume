@@ -30,7 +30,7 @@
 // Section header: spaced-caps title with a hairline filling the rest of the row.
 // More space above than below, so the header binds to its own content.
 #let section(title) = {
-  v(10pt)
+  v(9pt)
   grid(
     columns: (auto, 1fr),
     column-gutter: 10pt,
@@ -46,14 +46,14 @@
 // get one per row (wide: true).
 #let sidebar-group(title, items, wide: false) = align(right)[
   #text(font: display-font, weight: 600, size: 1.02em, fill: muted, title)
-  #v(-4pt)
+  #v(-3pt)
   #text(fill: ink, if wide {
     items.join(linebreak())
   } else {
-    // Non-breaking space before each pipe keeps separators at line ends.
-    items.join("\u{a0}| ")
+    // Light dot separators; the non-breaking space keeps them at line ends.
+    items.join(text(fill: rgb("#94a3b8"), "\u{a0}· "))
   })
-  #v(9pt)
+  #v(11pt)
 ]
 
 // A dated entry: muted period on the left, content on the right.
@@ -86,7 +86,7 @@
 #let education-section(education) = {
   section[Education]
   stack(
-    spacing: 10pt,
+    spacing: 8pt,
     ..education.map(e => entry(e.period)[
       #entry-heading(e.degree, [#e.school · #e.location])
       #v(-4pt)
@@ -98,7 +98,7 @@
 #let experience-section(experience) = {
   section[Professional Experience]
   stack(
-    spacing: 13pt,
+    spacing: 12pt,
     ..experience.map(e => entry(e.period)[
       #entry-heading(e.company, e.location)
       #v(-4pt)
@@ -180,7 +180,7 @@
 
 #let sidebar(basics, profiles, skills) = {
   set text(size: 0.94em)
-  set par(justify: false)
+  set par(justify: false, leading: 0.85em)
   sidebar-group("Profiles", profiles.map(p => link(p.url)[#p.label]), wide: true)
   for group in skills {
     sidebar-group(group.group, group.items)
@@ -197,7 +197,7 @@
   )
   set page(
     paper: "us-letter",
-    margin: (x: 1.3cm, top: 1.2cm, bottom: 1.4cm),
+    margin: (x: 1.3cm, top: 1.1cm, bottom: 1.3cm),
     footer: align(center, text(size: 8pt, fill: muted, context counter(page).display("1 / 1", both: true))),
   )
   set text(
@@ -209,7 +209,7 @@
     // Suppress widows/orphans at breaks and lone short words on final lines.
     costs: (widow: 10000%, orphan: 10000%, runt: 10000%),
   )
-  set par(justify: true, leading: 0.62em)
+  set par(justify: true, leading: 0.6em)
   show link: set text(fill: ink)
   body
 }

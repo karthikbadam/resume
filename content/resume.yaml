@@ -54,7 +54,8 @@ experience:
     title: Staff Software Engineer
     location: Foster City, CA, USA
     bullets:
-      - Building custom data tooling for autonomous systems.
+      - Building custom data tooling for autonomous systems — interactive interfaces and
+        services for exploring, curating, and debugging driving data.
   - period: 2019–2026
     company: Apple
     title: Staff Full Stack Engineer
@@ -64,9 +65,10 @@ experience:
         performance with data augmentation, advancing Apple's foundation models and Apple
         Intelligence products.
       - Created a data visualization platform for Siri and Spotlight teams to consume core
-        metrics across 10+ dimensions.
-      - Led development of a failure analysis platform adopted into the workflows of many
-        AI/ML product teams over the past five years.
+        metrics across 10+ dimensions, backed by Spark pipelines and a Druid-based caching
+        layer serving 10+ million dimension combinations.
+      - Led development of a failure analysis platform adopted by many AI/ML product teams
+        over five years, with annotation-based triage of failures and improvements.
   - period: 2014–2019
     company: University of Maryland
     title: Research Assistant and Instructor
@@ -90,15 +92,15 @@ experience:
     title: Research Intern
     location: Seattle, WA, USA
     bullets:
-      - Designed and evaluated a new viewing experience for data-rich documents containing
-        information in tables and charts.
+      - Designed and evaluated a new viewing experience for data-rich documents with
+        tables and charts (Elastic Documents, publication P5).
   - period: Summer 2016
     company: INRIA
     title: Visiting PhD Student
     location: Saclay, France
     bullets:
       - Built a progressive analytics system with Dr. Jean-Daniel Fekete to surface themes
-        discussed on Twitter using natural language processing.
+        discussed on Twitter using NLP (publication P3).
   - period: 2012–2014
     company: Purdue University
     title: Research Assistant
