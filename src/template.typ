@@ -88,9 +88,15 @@
   align(right, text(size: 0.88em, fill: muted, detail)),
 )
 
+// Join a string's last two words with a non-breaking space so a paragraph
+// can never end in a single-word line (runt).
+#let bind-runt(s) = if type(s) == str {
+  s.replace(regex("\s(\S+)$"), m => "\u{a0}" + m.captures.at(0))
+} else { s }
+
 // Markerless "bullets": plain statements separated by whitespace.
 // Gaps stay clearly smaller than the between-entry spacing so entries group.
-#let bullets(items) = stack(spacing: 6pt, ..items)
+#let bullets(items) = stack(spacing: 6pt, ..items.map(bind-runt))
 
 // --- Sections ---------------------------------------------------------------
 
@@ -101,7 +107,7 @@
     ..education.map(e => entry(e.period)[
       #entry-heading(e.degree, [#e.school · #e.location])
       #v(-4pt)
-      #text(size: 0.92em, fill: muted, e.note)
+      #text(size: 0.92em, fill: muted, bind-runt(e.note))
     ]),
   )
 }
@@ -134,9 +140,9 @@
       )
       #v(-3pt)
       #text(size: 0.96em)[
-        #p.description
+        #bind-runt(p.description)
         #if "contributions" in p [
-          #text(weight: 600)[Contributions:] #p.contributions
+          #text(weight: 600)[Contributions:] #bind-runt(p.contributions)
         ]
       ]
     ]),
@@ -152,7 +158,7 @@
       column-gutter: 8pt,
       text(font: display-font, weight: 600, size: 0.9em, fill: accent, p.id),
       text(size: 0.96em)[
-        #p.text
+        #bind-runt(p.text)
         #if "note" in p [ #text(weight: 600)[#p.note]]
       ],
     )),
@@ -203,7 +209,15 @@
     margin: (x: 1.3cm, top: 1.2cm, bottom: 1.4cm),
     footer: align(center, text(size: 8pt, fill: muted, context counter(page).display("1 / 1", both: true))),
   )
-  set text(font: body-font, size: base-size, fill: ink, tracking: -0.006em)
+  set text(
+    font: body-font,
+    size: base-size,
+    fill: ink,
+    tracking: -0.006em,
+    hyphenate: false,
+    // Suppress widows/orphans at breaks and lone short words on final lines.
+    costs: (widow: 10000%, orphan: 10000%, runt: 10000%),
+  )
   set par(justify: true, leading: 0.62em)
   show link: set text(fill: ink)
   body
