@@ -7,12 +7,12 @@
 // Page-1 background: rounded panel spanning the full height of the sidebar
 // column, from just below the header to the bottom margin.
 #set page(background: context if counter(page).get().first() == 1 {
-  place(top + left, dx: 1.5cm, dy: 81pt,
-    rect(width: (100% - 3cm) * 0.24, height: 100% - 81pt - 1.5cm, radius: 8pt, fill: panel))
+  place(top + left, dx: 1.5cm, dy: 94pt,
+    rect(width: (100% - 3cm) * 0.24, height: 100% - 94pt - 1.5cm, radius: 8pt, fill: panel))
 })
 
 #header-block(data.basics)
-#v(4pt)
+#v(14pt)
 
 // Page 1: sidebar (profiles, skills) + experience and education.
 #grid(
