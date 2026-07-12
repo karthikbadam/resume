@@ -4,7 +4,6 @@ basics:
   first_name: Karthik
   last_name: Badam
   email: karthikbadam7@gmail.com
-  location: San Jose, CA
   website: karthikbadam.github.io
   website_url: https://karthikbadam.github.io
   keywords: [resume, full stack, data visualization, machine learning, LLM evaluation]
@@ -46,7 +45,7 @@ education:
     degree: B.Tech. in Computer Science
     school: IIT Hyderabad
     location: Hyderabad, India
-    note: Mobile applications for rescue and recovery in post-disaster situations
+    note: "Thesis: Mobile applications for rescue and recovery operations in post-disaster situations"
 
 experience:
   - period: 2026 – now
@@ -67,8 +66,8 @@ experience:
       - Created a data visualization platform for Siri and Spotlight teams to consume core
         metrics across 10+ dimensions, backed by Spark pipelines and a Druid-based caching
         layer serving 10+ million dimension combinations.
-      - Led development of a failure analysis platform with annotation-based triage of
-        failures, adopted by many AI/ML product teams over the past five years.
+      - Led the development of a failure analysis platform with annotation-based triage,
+        adopted by 15 AI/ML product teams.
   - period: 2014 – 2019
     company: University of Maryland
     title: Research Assistant and Instructor

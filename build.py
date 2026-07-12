@@ -13,6 +13,7 @@ OUT = ROOT / "out"
 
 # Candidate font pairings (display font for name/headings, body font for text).
 VARIANTS = {
+    "poppins": {"display-font": "Poppins", "body-font": "Poppins"},
     "inter": {"display-font": "Space Grotesk", "body-font": "Inter"},
     "plex": {"display-font": "IBM Plex Sans", "body-font": "IBM Plex Sans"},
     "source": {"display-font": "Source Sans 3", "body-font": "Source Sans 3"},
@@ -36,7 +37,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--png", action="store_true", help="also render per-page PNG previews")
     parser.add_argument("--variants", action="store_true", help="build one PDF + page-1 PNG per font pairing")
-    parser.add_argument("--font", choices=VARIANTS, default="inter", help="font pairing for the main build")
+    parser.add_argument("--font", choices=VARIANTS, default="poppins", help="font pairing for the main build")
     args = parser.parse_args()
 
     OUT.mkdir(exist_ok=True)

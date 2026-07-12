@@ -10,10 +10,10 @@
 #let accent-tint = rgb("#e3edf6")
 
 // Font pairing is overridable per build: --input body-font=... --input display-font=...
-#let body-font = sys.inputs.at("body-font", default: "Inter")
-#let display-font = sys.inputs.at("display-font", default: "Space Grotesk")
+#let body-font = sys.inputs.at("body-font", default: "Poppins")
+#let display-font = sys.inputs.at("display-font", default: "Poppins")
 
-#let base-size = 9pt
+#let base-size = 8.5pt
 #let period-col = 58pt
 // One gap between entries everywhere, so sections have a uniform rhythm.
 #let entry-gap = 12pt
@@ -103,7 +103,18 @@
   let s = s.replace("AI/ML", "AI/\u{2060}ML")
   let m = s.match(regex("^([\s\S]*)\s(\S+)$"))
   if m == none { return s }
-  [#m.captures.at(0)\u{a0}#text(hyphenate: false, m.captures.at(1))]
+  let last = m.captures.at(1)
+  // A long word alone on the last line reads fine; only a short one is an
+  // ugly runt. Glue short last words to their neighbor, otherwise just stop
+  // the final word from hyphenating. Keeping glue rare preserves the line
+  // breaker's flexibility, which is what keeps word spacing even.
+  if last.len() <= 6 {
+    let m2 = s.match(regex("^([\s\S]*)\s(\S+\s\S+)$"))
+    if m2 != none {
+      return [#m2.captures.at(0) #text(hyphenate: false, m2.captures.at(1).replace(" ", "\u{a0}"))]
+    }
+  }
+  [#m.captures.at(0) #text(hyphenate: false, last)]
 }
 
 // Markerless "bullets": plain statements separated by whitespace.
@@ -190,20 +201,18 @@
 
 // --- Page furniture ----------------------------------------------------------
 
-// Header: name on the left, contact stacked on the right.
-#let header-block(basics) = grid(
-  columns: (1fr, auto),
-  align: (left + bottom, right + bottom),
-  {
-    text(font: display-font, size: 33pt, weight: 500, tracking: -0.02em, basics.first_name)
-    h(9pt)
-    text(font: display-font, size: 33pt, weight: 700, tracking: -0.02em, fill: accent, basics.last_name)
-  },
+// Header: name with website and email beneath it. Plain text (no link
+// annotations): PDF viewers merged the website link's hit area with the
+// adjacent name. Clickable links live in the sidebar.
+#let header-block(basics) = {
+  text(font: display-font, size: 33pt, weight: 500, tracking: -0.02em, basics.first_name)
+  h(9pt)
+  text(font: display-font, size: 33pt, weight: 700, tracking: -0.02em, basics.last_name)
+  v(0pt)
   text(size: 0.92em, fill: muted)[
-    #link(basics.website_url)[#basics.website] #h(3pt)·#h(3pt) #link("mailto:" + basics.email)[#basics.email] \
-    #basics.location
-  ],
-)
+    #basics.website #h(3pt)·#h(3pt) #basics.email
+  ]
+}
 
 #let sidebar(basics, profiles, skills) = {
   set text(size: 0.94em)
