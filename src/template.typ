@@ -101,9 +101,20 @@
 #let bind-runt(s) = {
   if type(s) != str { return s }
   let s = s.replace("AI/ML", "AI/\u{2060}ML")
-  let m = s.match(regex("^([\s\S]*)\s(\S+\s\S+)$"))
+  let m = s.match(regex("^([\s\S]*)\s(\S+)$"))
   if m == none { return s }
-  [#m.captures.at(0) #text(hyphenate: false, m.captures.at(1).replace(" ", "\u{a0}"))]
+  let last = m.captures.at(1)
+  // A long word alone on the last line reads fine; only a short one is an
+  // ugly runt. Glue short last words to their neighbor, otherwise just stop
+  // the final word from hyphenating. Keeping glue rare preserves the line
+  // breaker's flexibility, which is what keeps word spacing even.
+  if last.len() <= 6 {
+    let m2 = s.match(regex("^([\s\S]*)\s(\S+\s\S+)$"))
+    if m2 != none {
+      return [#m2.captures.at(0) #text(hyphenate: false, m2.captures.at(1).replace(" ", "\u{a0}"))]
+    }
+  }
+  [#m.captures.at(0) #text(hyphenate: false, last)]
 }
 
 // Markerless "bullets": plain statements separated by whitespace.
