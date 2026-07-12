@@ -10,10 +10,10 @@
 #let accent-tint = rgb("#e3edf6")
 
 // Font pairing is overridable per build: --input body-font=... --input display-font=...
-#let body-font = sys.inputs.at("body-font", default: "Inter")
-#let display-font = sys.inputs.at("display-font", default: "Space Grotesk")
+#let body-font = sys.inputs.at("body-font", default: "Poppins")
+#let display-font = sys.inputs.at("display-font", default: "Poppins")
 
-#let base-size = 9pt
+#let base-size = 8.5pt
 #let period-col = 58pt
 // One gap between entries everywhere, so sections have a uniform rhythm.
 #let entry-gap = 12pt
@@ -101,9 +101,9 @@
 #let bind-runt(s) = {
   if type(s) != str { return s }
   let s = s.replace("AI/ML", "AI/\u{2060}ML")
-  let m = s.match(regex("^([\s\S]*)\s(\S+)$"))
+  let m = s.match(regex("^([\s\S]*)\s(\S+\s\S+)$"))
   if m == none { return s }
-  [#m.captures.at(0)\u{a0}#text(hyphenate: false, m.captures.at(1))]
+  [#m.captures.at(0) #text(hyphenate: false, m.captures.at(1).replace(" ", "\u{a0}"))]
 }
 
 // Markerless "bullets": plain statements separated by whitespace.
