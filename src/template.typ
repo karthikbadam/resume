@@ -134,7 +134,7 @@
     ..education.map(e => entry(e.period)[
       #entry-heading(e.degree, [#e.school · #e.location])
       #v(-5pt)
-      #text(fill: muted, bind-runt(e.note))
+      #bind-runt(e.note)
     ]),
   )
 }
