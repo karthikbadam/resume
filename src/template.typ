@@ -37,7 +37,7 @@
     columns: (auto, 1fr),
     column-gutter: 10pt,
     align: horizon,
-    caps-label(title, size: 0.86em),
+    caps-label(title, size: 0.92em),
     line(length: 100%, stroke: 0.5pt + hairline),
   )
   v(2pt)
@@ -190,22 +190,22 @@
 
 // --- Page furniture ----------------------------------------------------------
 
-// Header: name on the left, contact stacked on the right. Indented to the
-// main column so the title aligns with the text below it.
-#let header-block(basics) = pad(left: 24% + 16pt, grid(
-  columns: (1fr, auto),
-  align: (left + bottom, right + bottom),
-  {
-    text(font: display-font, size: 31pt, weight: 500, tracking: -0.02em, basics.first_name)
-    h(8pt)
-    text(font: display-font, size: 31pt, weight: 700, tracking: -0.02em, fill: accent, basics.last_name)
-  },
-  align(right, text(size: 0.92em, fill: muted)[
-    #link(basics.website_url)[#basics.website] \
-    #link("mailto:" + basics.email)[#basics.email] \
+// Header: name and contact line, centered on the page.
+#let header-block(basics) = {
+  align(center, {
+    text(font: display-font, size: 33pt, weight: 500, tracking: -0.02em, basics.first_name)
+    h(9pt)
+    text(font: display-font, size: 33pt, weight: 700, tracking: -0.02em, fill: accent, basics.last_name)
+  })
+  v(-8pt)
+  align(center, text(size: 0.92em, fill: muted)[
+    #link(basics.website_url)[#basics.website]
+    #h(3pt)·#h(3pt)
+    #link("mailto:" + basics.email)[#basics.email]
+    #h(3pt)·#h(3pt)
     #basics.location
-  ]),
-))
+  ])
+}
 
 #let sidebar(basics, profiles, skills) = {
   set text(size: 0.94em)
