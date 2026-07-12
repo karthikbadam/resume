@@ -223,6 +223,34 @@
   }
 }
 
+// Two-column body: a tinted sidebar panel beside the main column. Both columns
+// are measured and the panel is drawn to the taller of the two, so it always
+// spans the full content height with rounded corners — no hand-set height or
+// vertical offset. Change the content and the panel resizes itself.
+//
+// side-inset-top nudges the sidebar's first heading to sit level with the main
+// column's first section caption. It depends only on the two font sizes, never
+// on content, so it stays fixed as jobs/skills are added or removed.
+#let sidebar-width = 24%
+#let column-gutter = 16pt
+#let side-inset-top = 8pt
+
+#let two-col(side, main) = layout(size => {
+  let sw = sidebar-width * size.width
+  let mw = size.width - column-gutter - sw
+  let side-inset = (x: 10pt, top: side-inset-top, bottom: 10pt)
+  let h = calc.max(
+    measure(block(width: sw, inset: side-inset, side)).height,
+    measure(block(width: mw, main)).height,
+  )
+  grid(
+    columns: (sw, mw),
+    column-gutter: column-gutter,
+    block(width: sw, height: h, inset: side-inset, radius: 8pt, fill: panel, side),
+    block(width: mw, main),
+  )
+})
+
 // --- Document shell -----------------------------------------------------------
 
 #let resume(data, body) = {
