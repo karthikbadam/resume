@@ -4,7 +4,6 @@ basics:
   first_name: Karthik
   last_name: Badam
   email: karthikbadam7@gmail.com
-  location: San Jose, CA
   website: karthikbadam.github.io
   website_url: https://karthikbadam.github.io
   keywords: [resume, full stack, data visualization, machine learning, LLM evaluation]
