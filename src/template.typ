@@ -190,22 +190,20 @@
 
 // --- Page furniture ----------------------------------------------------------
 
-// Header: name and contact line, centered on the page.
-#let header-block(basics) = {
-  align(center, {
+// Header: name on the left, contact stacked on the right.
+#let header-block(basics) = grid(
+  columns: (1fr, auto),
+  align: (left + bottom, right + bottom),
+  {
     text(font: display-font, size: 33pt, weight: 500, tracking: -0.02em, basics.first_name)
     h(9pt)
     text(font: display-font, size: 33pt, weight: 700, tracking: -0.02em, fill: accent, basics.last_name)
-  })
-  v(-8pt)
-  align(center, text(size: 0.92em, fill: muted)[
-    #link(basics.website_url)[#basics.website]
-    #h(3pt)·#h(3pt)
-    #link("mailto:" + basics.email)[#basics.email]
-    #h(3pt)·#h(3pt)
+  },
+  text(size: 0.92em, fill: muted)[
+    #link(basics.website_url)[#basics.website] #h(3pt)·#h(3pt) #link("mailto:" + basics.email)[#basics.email] \
     #basics.location
-  ])
-}
+  ],
+)
 
 #let sidebar(basics, profiles, skills) = {
   set text(size: 0.94em)
