@@ -1,0 +1,188 @@
+# Single source of truth for the resume. Edit here, then `make pdf`.
+
+basics:
+  first_name: Karthik
+  last_name: Badam
+  email: karthikbadam7@gmail.com
+  location: San Jose, CA
+  website: karthikbadam.github.io
+  website_url: https://karthikbadam.github.io
+  keywords: [resume, full stack, data visualization, machine learning, LLM evaluation]
+
+profiles:
+  - label: karthikbadam.github.io
+    url: https://karthikbadam.github.io
+  - label: linkedin/karthikbadam
+    url: https://www.linkedin.com/in/karthikbadam
+  - label: scholar/karthikbadam
+    url: https://scholar.google.com/citations?user=zaEcCvcAAAAJ
+
+skills:
+  - group: Frontend
+    items: [React, Svelte, Next.js, Jotai, Redux]
+  - group: Visualization
+    items: [D3, Vega, VisX, Mosaic, Altair, Dash]
+  - group: ML + MLOps
+    items: [PyTorch 2, JAX/Flax, scikit-learn, LightGBM, Triton Inference Server, MLflow, Weights & Biases]
+  - group: Data Engineering
+    items: [Spark, Airflow, Jupyter, Trino, DuckDB, Postgres, Neo4j, Druid, Cassandra, Redis]
+  - group: Languages
+    items: [JavaScript, TypeScript, HTML, CSS, GraphQL, Python, Go, Rust]
+  - group: Frameworks
+    items: [Express, Flask, FastAPI, GraphQL, REST APIs]
+
+education:
+  - period: 2014 – 2019
+    degree: Ph.D. in Computer Science
+    school: University of Maryland
+    location: College Park, MD, USA
+    note: "Thesis: Enabling collaborative visual analysis across heterogeneous devices"
+  - period: 2012 – 2014
+    degree: M.S. in Computer Engineering
+    school: Purdue University
+    location: West Lafayette, IN, USA
+    note: "Thesis: Developing digital media platforms for early design"
+  - period: 2008 – 2012
+    degree: B.Tech. in Computer Science
+    school: IIT Hyderabad
+    location: Hyderabad, India
+    note: Mobile applications for rescue and recovery in post-disaster situations
+
+experience:
+  - period: 2026 – now
+    company: Zoox
+    title: Staff Software Engineer
+    location: Foster City, CA, USA
+    bullets:
+      - "Building custom data tooling for autonomous systems: interactive interfaces and
+        services for exploring, curating, and debugging vehicular data."
+  - period: 2019 – 2026
+    company: Apple
+    title: Staff Full Stack Engineer
+    location: Cupertino, CA, USA
+    bullets:
+      - Built internal platforms to evaluate and improve generative language model (LLM)
+        performance with data augmentation, advancing Apple's foundation models and Apple
+        Intelligence products.
+      - Created a data visualization platform for Siri and Spotlight teams to consume core
+        metrics across 10+ dimensions, backed by Spark pipelines and a Druid-based caching
+        layer serving 10+ million dimension combinations.
+      - Led development of a failure analysis platform with annotation-based triage of
+        failures, adopted by many AI/ML product teams over the past five years.
+  - period: 2014 – 2019
+    company: University of Maryland
+    title: Research Assistant and Instructor
+    location: College Park, MD, USA
+    bullets:
+      - Conducted NSF-funded research in data visualization, HCI, and ML; published at top
+        visualization and HCI conferences.
+      - Created Vistrates, an open platform for visualization development, data exploration,
+        and presentation of insights.
+      - Taught the Visual Analytics and Information Visualization courses and mentored
+        several summer research interns.
+  - period: Summer 2018
+    company: Microsoft Research
+    title: Research Intern
+    location: Redmond, WA, USA
+    bullets:
+      - Created a data-driven storytelling tool for composing interactive visual stories
+        in data journalism.
+  - period: Summer 2017
+    company: Adobe Research
+    title: Research Intern
+    location: Seattle, WA, USA
+    bullets:
+      - Designed and evaluated a new viewing experience for data-rich documents with
+        tables and charts (Elastic Documents, publication P5).
+  - period: Summer 2016
+    company: INRIA
+    title: Visiting PhD Student
+    location: Saclay, France
+    bullets:
+      - Built a progressive analytics system with Dr. Jean-Daniel Fekete to surface themes
+        discussed on Twitter using NLP (publication P3).
+projects:
+  - name: LLM Evaluation Platform
+    stack: [React, TypeScript, Python, Turi Bolt, TensorRT, Celery, S3]
+    org: Apple
+    description:
+      End-to-end internal platform for evaluating generative language models and understanding
+      the datasets behind them. The benchmarking layer orchestrates distributed inference jobs,
+      compares outputs against ground truth, and surfaces results through interactive dashboards.
+      The data valuation layer generates diversity and quality signals for training datasets,
+      identifying gaps to improve models.
+    contributions:
+      Tech lead for a group of four engineers. Defined the technical vision and coordinated
+      cross-org partners. Led frontend and visualization work, built the data valuation pipelines
+      over training datasets, and contributed to the backend. Promoted adoption across the AI/ML
+      org and coached early users on diagnosing failures and tuning their models.
+  - name: Metrics Platform
+    stack: [React, VisX, Python, Spark, Airflow, Druid, Trino]
+    org: Apple
+    description:
+      Provides the top usage, engagement, performance, and user experience metrics for Siri and
+      Spotlight, built for monitoring and easy exploration of metrics across 10+ key dimensions.
+    contributions:
+      Backend development including Spark jobs for metrics creation. Front-end and visualization
+      development for an intuitive user experience. Infrastructure to fetch and serve metrics
+      across 10+ million dimension combinations using a caching service and Druid.
+  - name: Failure Analysis Platform
+    stack: [React, D3, Trino, Postgres]
+    org: Apple
+    description:
+      Data analysis platform in the AI/ML org used to triage failures and prioritize improvements.
+      Uses annotation and collaboration techniques so teams of engineers can identify failure
+      behaviors from individual data points.
+    contributions:
+      Requirements collection from user interviews, key design decisions, front-end and
+      visualization components, and back-end APIs.
+  - name: Vistrates
+    stack: [D3, Vega, JavaScript, Node, MongoDB]
+    org: University of Maryland
+    description:
+      A platform for data science that helps data scientists create analytical components in a
+      flexible user interface that transforms into a notebook for development, a dashboard for
+      exploration, and a slideshow for presentation (publication P6).
+  - name: TimeFork
+    stack: [JavaScript, D3, TensorFlow, Python]
+    org: University of Maryland
+    description:
+      Research tool for interactive prediction of time-series data. Uses ML models to generate
+      multiple predictions and help users compare possible futures; evaluated through user
+      studies in the stock market domain (publication P1).
+
+publications:
+  - id: P7
+    text: "S. K. Badam, S. Chandrasegaran, Z. Zeng, N. Elmqvist. Integrating Annotations into
+      Multidimensional Visual Dashboards. Information Visualization, 21(3): 270–284, 2022."
+  - id: P6
+    text: "S. K. Badam, A. Mathisen, R. Rädle, C. N. Klokmose, N. Elmqvist. Vistrates: A Component
+      Model for Ubiquitous Analytics. IEEE Transactions on Visualization and Computer Graphics
+      (Proc. InfoVis), 25(1): 586–596, 2019."
+  - id: P5
+    text: "S. K. Badam, Z. Liu, N. Elmqvist. Elastic Documents: Coupling Text and Tables through
+      Contextual Visualizations for Enhanced Document Reading. IEEE Transactions on Visualization
+      and Computer Graphics (Proc. InfoVis), 25(1): 661–671, 2019."
+  - id: P4
+    text: "T. Horak*, S. K. Badam,* N. Elmqvist, R. Dachselt. When David Meets Goliath: Combining
+      Smartwatches with a Large Vertical Display for Visual Data Exploration. Proceedings of the
+      ACM Conference on Human Factors in Computing Systems (CHI), 2018. *Equal contribution from
+      first two authors."
+    note: Received Honorable Mention (Top 4%)
+  - id: P3
+    text: "S. K. Badam, N. Elmqvist, J-D. Fekete. Steering the Craft: UI Elements and
+      Visualizations for Supporting Progressive Visual Analytics. Computer Graphics Forum
+      (Proc. EuroVis), 36(3): 491–502, 2017."
+  - id: P2
+    text: "S. K. Badam, F. Amini, N. Elmqvist, P. Irani. Supporting Visual Exploration for
+      Multiple Users in Large Display Environments. Proceedings of the IEEE Conference on Visual
+      Analytics Science and Technology (VAST), 2016."
+  - id: P1
+    text: "S. K. Badam, J. Zhao, S. Sen, N. Elmqvist, D. S. Ebert. TimeFork: Interactive
+      Prediction of Time Series. Proceedings of the ACM Conference on Human Factors in Computing
+      Systems (CHI), pp. 5409–5420, 2016."
+
+service:
+  - Program Committee Member for the ACM Intelligent User Interfaces (IUI) conference, 2018–2024.
+  - "Reviewer for HCI and visualization conferences: IEEE VAST 2015–2022, IEEE InfoVis 2017–2022,
+    ACM CHI 2019–2023, EuroVis 2019, ACM ITS 2015, ACM MobileHCI 2014, and IEEE SciVis 2013."
