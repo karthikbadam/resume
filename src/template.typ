@@ -224,7 +224,7 @@
   )
   set page(
     paper: "us-letter",
-    margin: (x: 1.3cm, top: 1.1cm, bottom: 1.2cm),
+    margin: (x: 1.5cm, y: 1.5cm),
     footer: align(center, text(size: 8pt, fill: muted, context counter(page).display("1 / 1", both: true))),
   )
   set text(
