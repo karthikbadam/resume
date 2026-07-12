@@ -197,11 +197,12 @@
   {
     text(font: display-font, size: 33pt, weight: 500, tracking: -0.02em, basics.first_name)
     h(9pt)
-    text(font: display-font, size: 33pt, weight: 700, tracking: -0.02em, fill: accent, basics.last_name)
+    text(font: display-font, size: 33pt, weight: 700, tracking: -0.02em, basics.last_name)
   },
+  // Plain text (no link annotations): PDF viewers merged the website link's
+  // hit area with the adjacent name. Clickable links live in the sidebar.
   text(size: 0.92em, fill: muted)[
-    #link(basics.website_url)[#basics.website] #h(3pt)·#h(3pt) #link("mailto:" + basics.email)[#basics.email] \
-    #basics.location
+    #basics.website #h(3pt)·#h(3pt) #basics.email
   ],
 )
 
