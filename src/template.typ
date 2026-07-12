@@ -208,7 +208,7 @@
   text(font: display-font, size: 33pt, weight: 500, tracking: -0.02em, basics.first_name)
   h(9pt)
   text(font: display-font, size: 33pt, weight: 700, tracking: -0.02em, basics.last_name)
-  v(2pt)
+  v(0pt)
   text(size: 0.92em, fill: muted)[
     #basics.website #h(3pt)·#h(3pt) #basics.email
   ]
