@@ -7,12 +7,12 @@
 // Page-1 background: rounded panel spanning the full height of the sidebar
 // column, from just below the header to the bottom margin.
 #set page(background: context if counter(page).get().first() == 1 {
-  place(top + left, dx: 1.5cm, dy: 128pt,
-    rect(width: (100% - 3cm) * 0.24, height: 100% - 128pt - 1.5cm, radius: 8pt, fill: panel))
+  place(top + left, dx: 1.5cm, dy: 120pt,
+    rect(width: (100% - 3cm) * 0.24, height: 100% - 120pt - 1.5cm, radius: 8pt, fill: panel))
 })
 
 // Half the page-1 slack goes above the header so content sits centered.
-#v(36pt)
+#v(28pt)
 #header-block(data.basics)
 #v(10pt)
 
@@ -26,6 +26,8 @@
     sidebar(data.basics, data.profiles, data.skills),
   ),
   {
+    // Nudge so the section caption tops out level with "Profiles" at left.
+    v(18pt)
     experience-section(data.experience)
     education-section(data.education)
   },

@@ -201,21 +201,18 @@
 
 // --- Page furniture ----------------------------------------------------------
 
-// Header: name on the left, contact stacked on the right.
-#let header-block(basics) = grid(
-  columns: (1fr, auto),
-  align: (left + bottom, right + bottom),
-  {
-    text(font: display-font, size: 33pt, weight: 500, tracking: -0.02em, basics.first_name)
-    h(9pt)
-    text(font: display-font, size: 33pt, weight: 700, tracking: -0.02em, basics.last_name)
-  },
-  // Plain text (no link annotations): PDF viewers merged the website link's
-  // hit area with the adjacent name. Clickable links live in the sidebar.
+// Header: name with website and email beneath it. Plain text (no link
+// annotations): PDF viewers merged the website link's hit area with the
+// adjacent name. Clickable links live in the sidebar.
+#let header-block(basics) = {
+  text(font: display-font, size: 33pt, weight: 500, tracking: -0.02em, basics.first_name)
+  h(9pt)
+  text(font: display-font, size: 33pt, weight: 700, tracking: -0.02em, basics.last_name)
+  v(-6pt)
   text(size: 0.92em, fill: muted)[
     #basics.website #h(3pt)·#h(3pt) #basics.email
-  ],
-)
+  ]
+}
 
 #let sidebar(basics, profiles, skills) = {
   set text(size: 0.94em)
