@@ -67,7 +67,7 @@ experience:
         metrics across 10+ dimensions, backed by Spark pipelines and a Druid-based caching
         layer serving 10+ million dimension combinations.
       - Led development of a failure analysis platform with annotation-based triage of
-        failures, adopted by many AI/ML product teams over the past five years.
+        failures, adopted by 15 AI/ML product teams.
   - period: 2014 – 2019
     company: University of Maryland
     title: Research Assistant and Instructor
