@@ -12,7 +12,7 @@
 })
 
 #header-block(data.basics)
-#v(14pt)
+#v(8pt)
 
 // Page 1: sidebar (profiles, skills) + experience and education.
 #grid(
