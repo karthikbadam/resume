@@ -78,11 +78,15 @@
 ]
 
 // A dated entry: period on the left, content on the right. Tabular figures
-// keep every year the same width so the column aligns.
+// keep every year the same width so the column aligns. The baseline shift drops
+// the 0.88em period onto the baseline of the 1.02em heading (company / degree)
+// beside it — a font-metric constant that only depends on those two sizes, so
+// it never needs touching as content changes.
+#let period-baseline-shift = 1.3pt
 #let entry(period, body) = grid(
   columns: (period-col, 1fr),
   column-gutter: 12pt,
-  text(size: 0.88em, number-width: "tabular", period),
+  text(size: 0.88em, baseline: period-baseline-shift, number-width: "tabular", period),
   body,
 )
 
