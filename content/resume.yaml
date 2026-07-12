@@ -66,8 +66,8 @@ experience:
       - Created a data visualization platform for Siri and Spotlight teams to consume core
         metrics across 10+ dimensions, backed by Spark pipelines and a Druid-based caching
         layer serving 10+ million dimension combinations.
-      - Led development of a failure analysis platform with annotation-based triage of
-        failures, adopted by 15 AI/ML product teams.
+      - Led the development of a failure analysis platform with annotation-based triage,
+        adopted by 15 AI/ML product teams.
   - period: 2014 – 2019
     company: University of Maryland
     title: Research Assistant and Instructor
