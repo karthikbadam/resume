@@ -7,14 +7,14 @@
 // Page-1 background: rounded panel spanning the full height of the sidebar
 // column, from just below the header to the bottom margin.
 #set page(background: context if counter(page).get().first() == 1 {
-  place(top + left, dx: 1.5cm, dy: 120pt,
-    rect(width: (100% - 3cm) * 0.24, height: 100% - 120pt - 1.5cm, radius: 8pt, fill: panel))
+  place(top + left, dx: 1.5cm, dy: 125pt,
+    rect(width: (100% - 3cm) * 0.24, height: 100% - 125pt - 1.5cm, radius: 8pt, fill: panel))
 })
 
 // Half the page-1 slack goes above the header so content sits centered.
-#v(28pt)
+#v(33pt)
 #header-block(data.basics)
-#v(10pt)
+#v(2pt)
 
 // Page 1: sidebar (profiles, skills) + experience and education.
 #grid(
