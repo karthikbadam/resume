@@ -9,10 +9,13 @@
 // is added or removed. No hand-tuned offsets or heights anywhere.
 #v(1fr)
 #header-block(data.basics)
-#v(6pt)
+#v(4pt)
 #two-col(
   sidebar(data.basics, data.profiles, data.skills),
   {
+    // Drop the first caption to match the sidebar's top inset, so "Profiles"
+    // and "Professional Experience" stay level.
+    v(3pt)
     experience-section(data.experience)
     education-section(data.education)
   },

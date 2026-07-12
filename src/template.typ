@@ -211,7 +211,7 @@
 #let header-block(basics) = {
   text(font: display-font, size: 33pt, weight: 500, tracking: -0.02em, basics.first_name)
   h(9pt)
-  text(font: display-font, size: 33pt, weight: 700, tracking: -0.02em, basics.last_name)
+  text(font: display-font, size: 33pt, weight: 500, tracking: -0.02em, basics.last_name)
   v(0pt)
   text(size: 0.92em, fill: muted)[
     #basics.website #h(3pt)·#h(3pt) #basics.email
@@ -237,7 +237,7 @@
 // on content, so it stays fixed as jobs/skills are added or removed.
 #let sidebar-width = 24%
 #let column-gutter = 16pt
-#let side-inset-top = 8pt
+#let side-inset-top = 11pt
 
 #let two-col(side, main) = layout(size => {
   let sw = sidebar-width * size.width
