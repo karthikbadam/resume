@@ -7,12 +7,12 @@
 // Page-1 background: rounded panel spanning the full height of the sidebar
 // column, from just below the header to the bottom margin.
 #set page(background: context if counter(page).get().first() == 1 {
-  place(top + left, dx: 1.5cm, dy: 125pt,
-    rect(width: (100% - 3cm) * 0.24, height: 100% - 125pt - 1.5cm, radius: 8pt, fill: panel))
+  place(top + left, dx: 1.5cm, dy: 119pt,
+    rect(width: (100% - 3cm) * 0.24, height: 100% - 119pt - 1.5cm, radius: 8pt, fill: panel))
 })
 
 // Half the page-1 slack goes above the header so content sits centered.
-#v(33pt)
+#v(27pt)
 #header-block(data.basics)
 #v(2pt)
 
