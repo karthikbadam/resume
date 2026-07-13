@@ -10,10 +10,10 @@
 #let accent-tint = rgb("#e3edf6")
 
 // Font pairing is overridable per build: --input body-font=... --input display-font=...
-#let body-font = sys.inputs.at("body-font", default: "Inter")
-#let display-font = sys.inputs.at("display-font", default: "Space Grotesk")
+#let body-font = sys.inputs.at("body-font", default: "Poppins")
+#let display-font = sys.inputs.at("display-font", default: "Poppins")
 
-#let base-size = 9pt
+#let base-size = 8.5pt
 #let period-col = 58pt
 // One gap between entries everywhere, so sections have a uniform rhythm.
 #let entry-gap = 12pt
@@ -78,11 +78,15 @@
 ]
 
 // A dated entry: period on the left, content on the right. Tabular figures
-// keep every year the same width so the column aligns.
+// keep every year the same width so the column aligns. The baseline shift drops
+// the 0.88em period onto the baseline of the 1.02em heading (company / degree)
+// beside it — a font-metric constant that only depends on those two sizes, so
+// it never needs touching as content changes.
+#let period-baseline-shift = 1.3pt
 #let entry(period, body) = grid(
   columns: (period-col, 1fr),
   column-gutter: 12pt,
-  text(size: 0.88em, number-width: "tabular", period),
+  text(size: 0.88em, baseline: period-baseline-shift, number-width: "tabular", period),
   body,
 )
 
@@ -103,7 +107,18 @@
   let s = s.replace("AI/ML", "AI/\u{2060}ML")
   let m = s.match(regex("^([\s\S]*)\s(\S+)$"))
   if m == none { return s }
-  [#m.captures.at(0)\u{a0}#text(hyphenate: false, m.captures.at(1))]
+  let last = m.captures.at(1)
+  // A long word alone on the last line reads fine; only a short one is an
+  // ugly runt. Glue short last words to their neighbor, otherwise just stop
+  // the final word from hyphenating. Keeping glue rare preserves the line
+  // breaker's flexibility, which is what keeps word spacing even.
+  if last.len() <= 6 {
+    let m2 = s.match(regex("^([\s\S]*)\s(\S+\s\S+)$"))
+    if m2 != none {
+      return [#m2.captures.at(0) #text(hyphenate: false, m2.captures.at(1).replace(" ", "\u{a0}"))]
+    }
+  }
+  [#m.captures.at(0) #text(hyphenate: false, last)]
 }
 
 // Markerless "bullets": plain statements separated by whitespace.
@@ -119,7 +134,7 @@
     ..education.map(e => entry(e.period)[
       #entry-heading(e.degree, [#e.school · #e.location])
       #v(-5pt)
-      #text(fill: muted, bind-runt(e.note))
+      #bind-runt(e.note)
     ]),
   )
 }
@@ -190,20 +205,18 @@
 
 // --- Page furniture ----------------------------------------------------------
 
-// Header: name on the left, contact stacked on the right.
-#let header-block(basics) = grid(
-  columns: (1fr, auto),
-  align: (left + bottom, right + bottom),
-  {
-    text(font: display-font, size: 33pt, weight: 500, tracking: -0.02em, basics.first_name)
-    h(9pt)
-    text(font: display-font, size: 33pt, weight: 700, tracking: -0.02em, fill: accent, basics.last_name)
-  },
+// Header: name with website and email beneath it. Plain text (no link
+// annotations): PDF viewers merged the website link's hit area with the
+// adjacent name. Clickable links live in the sidebar.
+#let header-block(basics) = {
+  text(font: display-font, size: 33pt, weight: 500, tracking: -0.02em, basics.first_name)
+  h(9pt)
+  text(font: display-font, size: 33pt, weight: 500, tracking: -0.02em, basics.last_name)
+  v(0pt)
   text(size: 0.92em, fill: muted)[
-    #link(basics.website_url)[#basics.website] #h(3pt)·#h(3pt) #link("mailto:" + basics.email)[#basics.email] \
-    #basics.location
-  ],
-)
+    #basics.website #h(3pt)·#h(3pt) #basics.email
+  ]
+}
 
 #let sidebar(basics, profiles, skills) = {
   set text(size: 0.94em)
@@ -213,6 +226,34 @@
     sidebar-group(group.group, group.items)
   }
 }
+
+// Two-column body: a tinted sidebar panel beside the main column. Both columns
+// are measured and the panel is drawn to the taller of the two, so it always
+// spans the full content height with rounded corners — no hand-set height or
+// vertical offset. Change the content and the panel resizes itself.
+//
+// side-inset-top nudges the sidebar's first heading to sit level with the main
+// column's first section caption. It depends only on the two font sizes, never
+// on content, so it stays fixed as jobs/skills are added or removed.
+#let sidebar-width = 24%
+#let column-gutter = 16pt
+#let side-inset-top = 11pt
+
+#let two-col(side, main) = layout(size => {
+  let sw = sidebar-width * size.width
+  let mw = size.width - column-gutter - sw
+  let side-inset = (x: 10pt, top: side-inset-top, bottom: 10pt)
+  let h = calc.max(
+    measure(block(width: sw, inset: side-inset, side)).height,
+    measure(block(width: mw, main)).height,
+  )
+  grid(
+    columns: (sw, mw),
+    column-gutter: column-gutter,
+    block(width: sw, height: h, inset: side-inset, radius: 8pt, fill: panel, side),
+    block(width: mw, main),
+  )
+})
 
 // --- Document shell -----------------------------------------------------------
 
