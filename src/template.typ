@@ -209,9 +209,13 @@
 // annotations): PDF viewers merged the website link's hit area with the
 // adjacent name. Clickable links live in the sidebar.
 #let header-block(basics) = {
-  text(font: display-font, size: 33pt, weight: 500, tracking: -0.02em, basics.first_name)
-  h(9pt)
-  text(font: display-font, size: 33pt, weight: 500, tracking: -0.02em, basics.last_name)
+  text(
+    font: display-font,
+    size: 33pt,
+    weight: 500,
+    tracking: -0.02em,
+    basics.first_name + " " + basics.last_name,
+  )
   v(0pt)
   text(size: 0.92em, fill: muted)[
     #basics.website #h(3pt)·#h(3pt) #basics.email
