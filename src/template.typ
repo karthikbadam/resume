@@ -216,7 +216,9 @@
     tracking: -0.02em,
     basics.first_name + " " + basics.last_name,
   )
-  v(0pt)
+  // Paragraph spacing below the name resolves to 1.2em of the 33pt line
+  // (39.6pt); only weak spacing replaces it instead of adding to it.
+  v(8pt, weak: true)
   text(size: 0.92em, fill: muted)[
     #basics.website #h(3pt)·#h(3pt) #basics.email
   ]
